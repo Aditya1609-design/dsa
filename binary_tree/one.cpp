@@ -128,6 +128,36 @@ void buildfromlot(node* &root){
     }
 }
 
+// morris traversal
+vector<int> inorder(Node* root){
+vector<int> ans;
+Node* curr=root;
+
+while(curr!=NULL){
+    if(!curr->left){
+        ans.push_back(curr->data);
+        curr=curr->right;
+    }
+    else{
+        Node Prev=curr->left;
+        while(prev->right!=NULL && prev->right!=curr){
+            prev=prev->right;
+        }
+        if(pre->right==NULL){
+            prev->right=curr;
+            curr=curr->left;
+        }
+        else{
+            prev->right=NULL;
+            ans.push_back(curr->data);
+            curr=curr->right;
+    }
+
+        return ans;
+        
+}
+
+
 int main(){
 
     node* root=NULL;
