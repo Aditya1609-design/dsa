@@ -5,7 +5,9 @@ void convertintoDLL(Node* root, Node* &head){
 
   convertintoDLL(root->right,head);
   root-right=head;
-  head->left=root;
+  if(head!=NULL){
+    head->left=root;
+  }
   head=root;
 
   convertintoDLL(root->left,head);
