@@ -1,0 +1,65 @@
+#include<iostream>
+#include<map>
+#include<unordered_map>
+using namespace std;
+
+int main(){
+    
+    // creation
+    unordered_map<string,int> m;
+    
+    // INSERTION
+    // 1st method
+    pair<string,int> p=make_pair("Adi",3);
+    m.insert(p);
+    
+    // 2nd ,method
+    pair<string,int> p2("mera",2);
+    m.insert(p2);
+    
+    // 3rd method
+    m["tera"]=8;
+    
+    // SEARCHING
+    cout<<m["mera"]<<endl;
+    cout<<m.at("Adi")<<endl;
+    
+    // special case
+    // this is it will create a entry for 0;
+    cout<<m["unknown"]<<endl;
+    cout<<m.at("unknown")<<endl;
+    
+    // but if we reverse it-->it will be aborted
+    // cout<<m.at("null")<<endl;
+    // cout<<m["null"]<<endl;
+    
+    // if we want to find weather the entry is present or not
+    cout<<m.count("Adi")<<endl; //it will result to 1
+    cout<<m.count("hello")<<endl; //it will result to 0
+    
+    
+    cout<<m.size()<<endl;
+    // erase any entry
+    m.erase("Adi");
+    cout<<m.size()<<endl;
+    
+    
+    // to traverse the whole map
+    // 1st method
+    for(auto i:m){
+        cout<<i.first<<" "<<i.second<<endl;
+    }
+    
+    // 2nd method-->Iterator method
+    unordered_map<string,int> :: iterator it=m.begin();
+    
+    while(it != m.end()){
+        cout<<it->first<<" "<<it->second<<endl;
+        it++;
+    }
+    
+    
+    
+    
+    return 0;
+}
