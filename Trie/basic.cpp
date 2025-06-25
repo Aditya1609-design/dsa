@@ -76,6 +76,52 @@ class Trie{
         return searchUtil(root,word);
     }
 
+
+    bool deleteUtil(Trienode* root,string word){
+        if(word.length()==0){
+            root->isTerminal=false;
+
+            for(int i=0;i<26;i++){
+                if(root->children[i] !=NULL){
+                    return false; //node cannot be deleted
+                }
+            }
+
+            return true; //node can be deleted
+        }
+
+        int index=word[0]-'A';
+        Trienode* child;
+
+        if(root->children[index] !=  NULL){
+            child=root->children[index];
+        }
+        else{
+            return false;
+        }
+
+        bool shouldbedeleted=deleteUtil(child,word.substr(1));
+
+        if(shouldbedeleted){
+            delete child;
+            root->children[index]=NULL;
+
+            if(root->isTerminal==false){
+                for(int i=0;i<26;i++){
+                    if(root->children[i] !=NULL){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void deleteaword(string word){
+        deleteUtil(root,word);
+    }
+
 };
 
 
@@ -89,6 +135,10 @@ int main() {
 
     cout<<"present or not "<< t->searchword("TIRE")<<endl;
     cout<<"present or not "<< t->searchword("TIR")<<endl;
+
+
+    t->deleteaword("TIME");
+    cout<<"present or not "<< t->searchword("TIME")<<endl;
 
 
 
